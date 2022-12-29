@@ -41,11 +41,14 @@ while download_id < stop + 1:
     if not Path(download_dir + divider + str('{:04d}'.format(download_id))).is_file():
         response = get(f"https://reflex-central.com/download.php?track_id={str(download_id)}", cookies=cookies)
         try:
-            track_name = get(f"https://reflex-central.com/track_profile.php?track_id={str(download_id)}").text.split('\n')[71].split('b>')[1][:-3]
+            html = get(f"https://reflex-central.com/track_profile.php?track_id={str(download_id)}").text.split('\n')
+            track_name = html[71].split('b>')[1][:-3].strip()
+            track_type = html[95].replace('		</font>', '').strip()
         except IndexError:
-            track_name, skip = '', True
+            track_name, track_type, skip = '', '', True
         if not skip:
-            with open(f"{download_dir}{divider}{str('{:04d}'.format(download_id))} - {track_name}", "wb") as f:
+            with open(f"{download_dir}{divider}{str('{:04d}'.format(download_id))} - {track_name} - {track_type}",
+                      "wb") as f:
                 f.write(response.content)
     download_id += 1
 
