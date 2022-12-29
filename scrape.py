@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from os import name
+from os import listdir, name
 from os.path import expanduser
 from pathlib import Path
 
@@ -33,12 +33,17 @@ cookies = {"PHPSESSID": credentials}
 # ensure download location exists
 Path(download_dir).mkdir(mode=0o700, parents=True, exist_ok=True)
 
+# create database of pre-existing files
+file_list, file_list_ids = sorted(listdir(download_dir)), []
+for file in file_list:
+    file_list_ids.append(file[:4])
+
 # track download loop
 download_id = start
 while download_id < stop + 1:
-    skip = False
     print(f"\rprogress: {str('{:04d}'.format(download_id))}/{str('{:04d}'.format(stop))}", end='')
-    if not Path(download_dir + divider + str('{:04d}'.format(download_id))).is_file():
+    if str('{:04d}'.format(download_id)) not in file_list_ids:
+        skip = False
         response = get(f"https://reflex-central.com/download.php?track_id={str(download_id)}", cookies=cookies)
         try:
             html = get(f"https://reflex-central.com/track_profile.php?track_id={str(download_id)}").text.split('\n')
@@ -52,4 +57,4 @@ while download_id < stop + 1:
                 f.write(response.content)
     download_id += 1
 
-print('\ntrack download complete')
+print('\n\ntrack download complete')
