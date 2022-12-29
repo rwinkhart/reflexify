@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from os import listdir, name
+from os import listdir
 from os.path import expanduser
 from pathlib import Path
 
@@ -8,14 +8,8 @@ from requests import get
 
 download_dir = input('download location (full path): ').rstrip('\\').rstrip('/')
 
-# set divider character based on OS
-if name == 'nt':
-    divider = '\\'
-else:
-    divider = '/'
-
 if download_dir == '' or download_dir == ' ':
-    download_dir = expanduser(f"~{divider}Downloads{divider}reflexTracks")
+    download_dir = expanduser('~/Downloads/reflexTracks')
 
 credentials = input('PHPSESSID cookie: ')
 try:
@@ -52,7 +46,7 @@ while download_id < stop + 1:
         except IndexError:
             track_name, track_type, skip = '', '', True
         if not skip:
-            with open(f"{download_dir}{divider}{str('{:04d}'.format(download_id))} -\x1f- {track_name} -\x1f- "
+            with open(f"{download_dir}/{str('{:04d}'.format(download_id))} -\x1f- {track_name} -\x1f- "
                       f"{track_type}", "wb") as f:
                 f.write(response.content)
     download_id += 1
