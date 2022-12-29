@@ -52,8 +52,8 @@ while download_id < stop + 1:
         except IndexError:
             track_name, track_type, skip = '', '', True
         if not skip:
-            with open(f"{download_dir}{divider}{str('{:04d}'.format(download_id))} - {track_name} - {track_type}",
-                      "wb") as f:
+            with open(f"{download_dir}{divider}{str('{:04d}'.format(download_id))} -\x1f- {track_name} -\x1f- "
+                      f"{track_type}", "wb") as f:
                 f.write(response.content)
     download_id += 1
 
