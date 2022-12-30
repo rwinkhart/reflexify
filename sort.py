@@ -27,7 +27,14 @@ for filename in file_list:
                     beta_slot_folder = sorting_dir + file_details[-1] + '/' + file.split('.')[0][-1] + '/' +\
                         file_details[0] + ' - ' + file_details[1] + '/'
                     Path(beta_slot_folder).mkdir(mode=0o700, parents=True, exist_ok=True)
-                    move(subfolder + '/' + file, beta_slot_folder)
+                    if file_details[-1] == 'National':
+                        type_identifier = '_Nat'
+                    elif file_details[-1] == 'Supercross':
+                        type_identifier = '_Sx'
+                    else:
+                        type_identifier = ''
+                    move(subfolder + '/' + file, beta_slot_folder +
+                         f"Beta{type_identifier}_Track_Slot_{file.split('.')[0][-1]}.dx9.{file.split('.')[-1]}")
         files = [f for f in listdir(temp_folder)]
         for file in files:
             if file.endswith('.database') or file.endswith('.level') or file.endswith('.package') or \
@@ -35,5 +42,12 @@ for filename in file_list:
                 beta_slot_folder = sorting_dir + file_details[-1] + '/' + file.split('.')[0][-1] + '/' + \
                                file_details[0] + ' - ' + file_details[1] + '/'
                 Path(beta_slot_folder).mkdir(mode=0o700, parents=True, exist_ok=True)
-                move(temp_folder + '/' + file, beta_slot_folder)
+                if file_details[-1] == 'National':
+                    type_identifier = '_Nat'
+                elif file_details[-1] == 'Supercross':
+                    type_identifier = '_Sx'
+                else:
+                    type_identifier = ''
+                move(temp_folder + '/' + file, beta_slot_folder +
+                     f"Beta{type_identifier}_Track_Slot_{file.split('.')[0][-1]}.dx9.{file.split('.')[-1]}")
         rmtree(temp_folder)
