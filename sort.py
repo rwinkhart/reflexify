@@ -10,10 +10,8 @@ sorting_dir = input('target (sorted) directory (full path): ').rstrip('/') + '/'
 
 file_list = sorted(listdir(archive_dir))
 
-# ensure sorting locations exist
-[Path(sorting_dir + 'Free Ride/' + str(i)).mkdir(mode=0o700, parents=True, exist_ok=True) for i in range(1, 9)]
-[Path(sorting_dir + 'National/' + str(i)).mkdir(mode=0o700, parents=True, exist_ok=True) for i in range(1, 9)]
-[Path(sorting_dir + 'Supercross/' + str(i)).mkdir(mode=0o700, parents=True, exist_ok=True) for i in range(1, 9)]
+# ensure sorting location exists
+Path(sorting_dir).mkdir(mode=0o700, parents=True, exist_ok=True)
 
 for filename in file_list:
     if getsize(archive_dir + filename) > 4718592:
