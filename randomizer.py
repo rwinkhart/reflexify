@@ -11,9 +11,6 @@ parser.add_argument('database_dir', nargs='+',
                     help='the full path to your MX vs. ATV Reflex database folder')
 parser.add_argument('sorted_dir', nargs='+',
                     help='the full path to your sorted Reflex Central archive')
-# optional
-parser.add_argument('-f', '--favorites', action='store_true',
-                    help='only pull tracks from your favorites folder')
 args = parser.parse_args()
 
 database_dir = args.database_dir[0].rstrip('/') + '/'
