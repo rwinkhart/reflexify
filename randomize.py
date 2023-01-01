@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
 from os import remove, scandir, symlink
-from os.path import exists
+from os.path import islink
 from random import choice
 
 # argument parsing
@@ -20,13 +20,13 @@ for i in range(1, 9):
     # national
     options = [f.path for f in scandir(sorted_dir + 'National/' + str(i)) if f.is_dir()]
     track = choice(options)
-    if exists(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.database"):
+    if islink(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.database"):
         remove(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.database")
-    if exists(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.level"):
+    if islink(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.level"):
         remove(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.level")
-    if exists(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.package"):
+    if islink(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.package"):
         remove(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.package")
-    if exists(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.scene"):
+    if islink(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.scene"):
         remove(f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.scene")
     symlink(f"{track}/Beta_Nat_Track_Slot_{str(i)}.dx9.database",
             f"{database_dir}Beta_Nat_Track_Slot_{str(i)}.dx9.database")
@@ -39,13 +39,13 @@ for i in range(1, 9):
     # supercross
     options = [f.path for f in scandir(sorted_dir + 'Supercross/' + str(i)) if f.is_dir()]
     track = choice(options)
-    if exists(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.database"):
+    if islink(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.database"):
         remove(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.database")
-    if exists(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.level"):
+    if islink(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.level"):
         remove(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.level")
-    if exists(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.package"):
+    if islink(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.package"):
         remove(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.package")
-    if exists(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.scene"):
+    if islink(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.scene"):
         remove(f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.scene")
     symlink(f"{track}/Beta_Sx_Track_Slot_{str(i)}.dx9.database",
             f"{database_dir}Beta_Sx_Track_Slot_{str(i)}.dx9.database")
@@ -58,13 +58,13 @@ for i in range(1, 9):
     # free ride
     options = [f.path for f in scandir(sorted_dir + 'Free Ride/' + str(i)) if f.is_dir()]
     track = choice(options)
-    if exists(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.database"):
+    if islink(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.database"):
         remove(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.database")
-    if exists(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.level"):
+    if islink(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.level"):
         remove(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.level")
-    if exists(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.package"):
+    if islink(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.package"):
         remove(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.package")
-    if exists(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.scene"):
+    if islink(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.scene"):
         remove(f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.scene")
     symlink(f"{track}/Beta_Track_Slot_{str(i)}.dx9.database",
             f"{database_dir}Beta_Track_Slot_{str(i)}.dx9.database")
